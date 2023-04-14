@@ -8,12 +8,12 @@
     <language>en-us</language>
     <lastBuildDate>Fri, 14 Apr 2023 20:41:45 +0200</lastBuildDate><atom:link href="https://ramomolise.github.io/tags/proxmox/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Proxmox VE Full Desktop Installation</title>
+      <title>Proxmox VE Full Desktop Setup</title>
       <link>https://ramomolise.github.io/posts/proxmoxsetup/</link>
       <pubDate>Fri, 14 Apr 2023 20:41:45 +0200</pubDate>
       
       <guid>https://ramomolise.github.io/posts/proxmoxsetup/</guid>
-      <description>Step 1: Install Proxmox &amp;amp; Configure Logical Volumes Link to heading First install proxmox in Boot Drive By default, Proxmox creates two Logical Volumes, I would recommend using all your disk space in a single Logical Volume especially if you are planning to use your Proxmox as a full Desktop with a user interface and GUI applications, or if you have a small Boot Disk.
+      <description>Step 1: Install Proxmox &amp;amp; Configure Logical Volumes Link to heading First install Proxmox in a Boot Drive By default, Proxmox creates two Logical Volumes, I would recommend using all your disk space in a single Logical Volume especially if you are planning to use your Proxmox as a full Desktop with a user interface and GUI applications, or if you have a small drive.
 To use the full Boot Drive as a single logical volume, increase the &amp;ldquo;local&amp;rdquo; volume storage size by first deleting the &amp;ldquo;local-lvm&amp;rdquo; volume on the Proxmox user Interface.</description>
     </item>
     

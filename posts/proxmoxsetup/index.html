@@ -3,7 +3,7 @@
 
 <head>
   <title>
-  Proxmox VE Full Desktop Installation · Ramo Molise
+  Proxmox VE Full Desktop Setup · Ramo Molise
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,10 +17,10 @@
 <meta name="keywords" content="blog,developer,personal">
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Proxmox VE Full Desktop Installation"/>
+<meta name="twitter:title" content="Proxmox VE Full Desktop Setup"/>
 <meta name="twitter:description" content="On this post, I wiil be sharing my optimal Setup for Proxmox VE with a Desktop Environment"/>
 
-<meta property="og:title" content="Proxmox VE Full Desktop Installation" />
+<meta property="og:title" content="Proxmox VE Full Desktop Setup" />
 <meta property="og:description" content="On this post, I wiil be sharing my optimal Setup for Proxmox VE with a Desktop Environment" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ramomolise.github.io/posts/proxmoxsetup/" /><meta property="article:section" content="posts" />
@@ -125,7 +125,7 @@
         <div class="post-title">
           <h1 class="title">
             <a class="title-link" href="https://ramomolise.github.io/posts/proxmoxsetup/">
-              Proxmox VE Full Desktop Installation
+              Proxmox VE Full Desktop Setup
             </a>
           </h1>
         </div>
@@ -169,9 +169,9 @@
   </a>
 </h1>
 <ul>
-<li>First install proxmox in Boot Drive</li>
+<li>First install Proxmox in a Boot Drive</li>
 </ul>
-<p>By default, Proxmox creates two Logical Volumes, I would recommend using all your disk space in a single Logical Volume especially if you are planning to use your Proxmox as a full Desktop with a user interface and GUI applications, or if you have a small Boot Disk.</p>
+<p>By default, Proxmox creates two Logical Volumes, I would recommend using all your disk space in a single Logical Volume especially if you are planning to use your Proxmox as a full Desktop with a user interface and GUI applications, or if you have a small drive.</p>
 <ul>
 <li>To use the full Boot Drive as a single logical volume, increase the &ldquo;local&rdquo; volume storage size by first deleting the &ldquo;local-lvm&rdquo; volume on the Proxmox user Interface. Once removed, resize the &ldquo;local&rdquo; volume on the Shell using these commands:</li>
 </ul>
@@ -188,6 +188,7 @@ resize2fs /dev/mapper/pve-root`
 <ul>
 <li>Add additional HDD&rsquo;s/SSD&rsquo;s by Wiping each Drive and Initializing it to GPT under <strong>System&gt;Disks</strong>. After Wiping and Initializing the Disks, under <strong>System&gt;Directory</strong>, add each Disk by creating new Directory, selecting the Disk, then naming the Disk.</li>
 </ul>
+<p>/Note: By adding your drives as Proxmox Storage, the Desktop Environment wont be able to pick up the drives as a normal PC would, but you will have more storage options for your VM&rsquo;s. For those planning on having a NAS, rather do a full disk passthrough.</p>
 <h1 id="step-3-install-user-interface">
   Step 3: Install User Interface
   <a class="heading-link" href="#step-3-install-user-interface">
@@ -243,16 +244,16 @@ tasksel
 <li>Download Nomachine .deb file <a href="https://www.nomachine.com/"  class="external-link" target="_blank" rel="noopener">https://www.nomachine.com/</a> and install with:</li>
 </ul>
 <pre tabindex="0"><code>dpkg -i nomachine*.deb
-</code></pre><h1 id="gaming-directly-on-proxmox-ve-desktop">
-  Gaming Directly on Proxmox VE Desktop
-  <a class="heading-link" href="#gaming-directly-on-proxmox-ve-desktop">
+</code></pre><h1 id="my-experience-gaming-directly-on-proxmox-ve-desktop">
+  My Experience Gaming Directly on Proxmox VE Desktop
+  <a class="heading-link" href="#my-experience-gaming-directly-on-proxmox-ve-desktop">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h1>
 <p>My experience directly gaming on Proxmox VE is very decent on my Ryzen 7 5700G with Vega 8, a majority of my Steam Games work perfectly using the latest Proton, Proton Experimental and/or Proton GE with the exceptionally annoying problem of not running Warframe.</p>
 <p>Warframe launches and complains about DirectX10 being unsupported, so I thought maybe updating the drivers would make a difference but when I try to to install amdgpu firmware, Proxmox will not install the amdgpu firmware without removing the pve firmware, which I&rsquo;m not willing to do.</p>
-<p>GPU passthrough should work sufficiently for it though.</p>
+<p>GPU passthrough should work sufficiently for it though. In all honestly, the fact that I can even play certain Steam games directly on Proxmox was a huge surprise. Proxmox is really powerful, and extremely versatile. Do give it a shot!</p>
 
       </div>
 
