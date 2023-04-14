@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  Proxmox VE Full Desktop Installation · Ramo Molise
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Ramo Molise">
+<meta name="description" content="On this post, I wiil be sharing my optimal Setup for Proxmox VE with a Desktop Environment">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Proxmox VE Full Desktop Installation"/>
+<meta name="twitter:description" content="On this post, I wiil be sharing my optimal Setup for Proxmox VE with a Desktop Environment"/>
+
+<meta property="og:title" content="Proxmox VE Full Desktop Installation" />
+<meta property="og:description" content="On this post, I wiil be sharing my optimal Setup for Proxmox VE with a Desktop Environment" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ramomolise.github.io/posts/proxmoxsetup/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-14T20:41:45+02:00" />
+<meta property="article:modified_time" content="2023-04-14T20:41:45+02:00" />
+
+
+
+
+<link rel="canonical" href="https://ramomolise.github.io/posts/proxmoxsetup/">
+
+
+<link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.65236a6d834b26194eed04a2a3b45e44d9194ef9e620253705d4bef03bd7ef81.css" integrity="sha256-ZSNqbYNLJhlO7QSio7ReRNkZTvnmICU3BdS&#43;8DvX74E=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.f6534b0b446b75d9b6ad77a97d43ede2ddaeff1b6e2361fb7198d6f8fcb7f83f.css" integrity="sha256-9lNLC0Rrddm2rXepfUPt4t2u/xtuI2H7cZjW&#43;Py3&#43;D8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-dark">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Ramo Molise
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Blog</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://ramomolise.github.io/posts/proxmoxsetup/">
+              Proxmox VE Full Desktop Installation
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2023-04-14T20:41:45&#43;02:00">
+                April 14, 2023
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              3-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa fa-user" aria-hidden="true"></i>
+    <a href="/authors/ramo-molise/">Ramo Molise</a></div>
+
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/setup/">Setup</a></div>
+
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/proxmox/">Proxmox</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h1 id="step-1-install-proxmox--configure-logical-volumes">
+  Step 1: Install Proxmox &amp; Configure Logical Volumes
+  <a class="heading-link" href="#step-1-install-proxmox--configure-logical-volumes">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<ul>
+<li>FIrst install proxmox in Boot Drive</li>
+</ul>
+<p>By default, Proxmox creates two Logical Volumes, I would recommend using all your disk space in a single Logical Volume especially if you are planning to use your Proxmox as a full Desktop with a user interface and GUI applications, or if you have a small Boot Disk.</p>
+<ul>
+<li>To use the full Boot Drive as a single logical volume, increase the &ldquo;local&rdquo; volume storage size by first deleting the &ldquo;local-lvm&rdquo; volume on the Proxmox user Interface. Once removed, resize the &ldquo;local&rdquo; volume on the Shell using these commands:</li>
+</ul>
+<pre tabindex="0"><code>lvremove /dev/pve/data
+lvresize -l +100%FREE /dev/pve/root
+resize2fs /dev/mapper/pve-root`
+</code></pre><h1 id="step-2-additional-storage-optional">
+  Step 2: Additional Storage (Optional)
+  <a class="heading-link" href="#step-2-additional-storage-optional">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<ul>
+<li>Add additional HDD&rsquo;s/SSD&rsquo;s by Wiping each Drive and Initializing it to GPT under <strong>System&gt;Disks</strong>. After Wiping and Initializing the Disks, under <strong>System&gt;Directory</strong>, add each Disk by creating new Directory, selecting the Disk, then naming the Disk.</li>
+</ul>
+<h1 id="step-3-install-user-interface">
+  Step 3: Install User Interface
+  <a class="heading-link" href="#step-3-install-user-interface">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>You can use any method you prefer to install any <strong>Desktop Environment</strong> or <strong>Window Manager</strong> through the command line, here is a simple method using <strong>tasksel</strong> which comes preinstalled on Proxmox:</p>
+<ul>
+<li>Install Desktop Environment using Tasksel:</li>
+</ul>
+<pre tabindex="0"><code>apt update &amp;&amp; apt upgrade
+tasksel
+</code></pre><p>You will be given options to install some of the common Desktop Environments, select what you prefer.</p>
+<h1 id="step-4-add-user-account">
+  Step 4: Add User Account
+  <a class="heading-link" href="#step-4-add-user-account">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<ul>
+<li>Add new User Account</li>
+</ul>
+<pre tabindex="0"><code>adduser username
+</code></pre><ul>
+<li>Add new User to sudo group</li>
+</ul>
+<pre tabindex="0"><code>/usr/sbin/usermod -aG sudo username
+</code></pre><ul>
+<li>Reboot the sytem</li>
+</ul>
+<pre tabindex="0"><code>reboot now
+</code></pre><p><em>Note: I&rsquo;ve come accross an issue when trying to login with the new user and the login manager just reloads and does nothing. If you are facing this, login with root user then under your Desktop Environments Settings, delete the previously created user, and recreate the user. Logout and then login again using your non-root user.</em></p>
+<h1 id="step-5-optional-settings">
+  Step 5: Optional Settings
+  <a class="heading-link" href="#step-5-optional-settings">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>When using SPICE as a Display for your Virtual Machines, install Virt Viewer.</p>
+<ul>
+<li>Install Virt Viewer</li>
+</ul>
+<pre tabindex="0"><code>sudo apt install virt-viewer
+</code></pre><ul>
+<li>On the Proxmox User Interface, click on the your Virtual Machine, enable all Spice Enhancements under <strong>Options</strong></li>
+<li>Spice also has Guest tools/drivers on  <a href="https://www.spice-space.org/download.html"  class="external-link" target="_blank" rel="noopener">https://www.spice-space.org/download.html</a> for both Windows and Linux</li>
+</ul>
+<p>I find that Nomachine is best for my use cases as a Remote-Desktop Service for my VM&rsquo;s as I can fully use my VM&rsquo;s at 60FPS including audio over WiFi in my local network. Nomachine even has an app for my old Android 4.4 Tablet thus I can even run Windows 11 indirectly through the tablet</p>
+<ul>
+<li>Download Nomachine .deb file <a href="https://www.nomachine.com/"  class="external-link" target="_blank" rel="noopener">https://www.nomachine.com/</a> and install with:</li>
+</ul>
+<pre tabindex="0"><code>dpkg -i nomachine*.deb
+</code></pre><h1 id="gaming-directly-on-proxmox-ve-desktop">
+  Gaming Directly on Proxmox VE Desktop
+  <a class="heading-link" href="#gaming-directly-on-proxmox-ve-desktop">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>My experience directly gaming on Proxmox VE is very decent on my Ryzen 7 5700G with Vega 8, a majority of my Steam Games work perfectly using the latest Proton, Proton Experimental and/or Proton GE with the exceptionally annoying problem of not running Warframe.</p>
+<p>Warframe launches and complains about DirectX10 being unsupported, so I thought maybe updating the drivers would make a difference but when I try to to install amdgpu firmware, Proxmox will not install the amdgpu firmware without removing the pve firmware, which I&rsquo;m not willing to do.</p>
+<p>GPU passthrough should work sufficiently for it though.</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2023
+     Ramo Molise 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>
